@@ -52,7 +52,7 @@ const Navbar = () => {
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent:'space-between', alignItems:'center'}}>
+          <Toolbar disableGutters sx={{ justifyContent:'space-between', alignItems:'center' }}>
             <Typography variant="h6" sx={{  color: 'text.secondary', fontWeight: 'bold' }}>
               ShopHub
             </Typography>
