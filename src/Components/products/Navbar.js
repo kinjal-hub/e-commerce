@@ -12,6 +12,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Cart', path: '/cart' },
+    { name: 'Button', path: '/button' },
   ];
 
   const handleDrawerToggle = () => {
@@ -51,8 +52,8 @@ const Navbar = () => {
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography variant="h6" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start', color: 'text.secondary', fontWeight: 'bold' }}>
+          <Toolbar disableGutters sx={{ justifyContent:'space-between', alignItems:'center'}}>
+            <Typography variant="h6" sx={{  color: 'text.secondary', fontWeight: 'bold' }}>
               ShopHub
             </Typography>
             {isMobile ? (
