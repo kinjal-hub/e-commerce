@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { AppBar, Container, Typography, Button, List, ListItem, Toolbar, Box, Drawer, IconButton, ListItemText, useTheme, useMediaQuery } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation
+import { Link, useLocation } from 'react-router-dom'; 
 import MenuIcon from '@mui/icons-material/Menu';
+import Searchbar from '../products/Searchbar';
 
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation(); 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -52,10 +54,11 @@ const Navbar = () => {
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent:'space-between', alignItems:'center' }}>
-            <Typography variant="h6" sx={{  color: 'text.secondary', fontWeight: 'bold' }}>
-              ShopHub
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
+            <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 'bold' }}>
+              ShoppHub
             </Typography>
+             <Searchbar />
             {isMobile ? (
               <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
                 <MenuIcon sx={{ color: 'text.secondary' }} />
@@ -97,3 +100,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
