@@ -44,6 +44,18 @@ const theme = createTheme({
       hint: "#FFEDCE",
     },
   },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            boxShadow: 10, // Adjust elevation level (0-24)
+            transform: 'scale(1.02)', // Slightly enlarge the card
+          },
+        }
+      }
+    }
+  },
   typography: {
     fontFamily: baseTheme.typography.fontFamily,
     h1: {
