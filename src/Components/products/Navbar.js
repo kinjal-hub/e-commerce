@@ -12,9 +12,10 @@ const Navbar = () => {
   
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },
     { name: 'Button', path: '/button' },
+    {name: 'order', path: '/order'}
   ];
 
   const handleDrawerToggle = () => {
@@ -54,12 +55,14 @@ const Navbar = () => {
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
+          <Toolbar disableGutters sx={{ display:'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2}}>
             <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 'bold' }}>
-              ShoppHub
+              ShopHub
             </Typography>
-             <Searchbar />
-            {isMobile ? (
+            <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '240px' }, justifyContent: 'center' }} >
+              <Searchbar placeholder='Serach...'/>
+            </Box>
+          {isMobile ? (
               <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
                 <MenuIcon sx={{ color: 'text.secondary' }} />
               </IconButton>
