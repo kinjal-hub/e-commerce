@@ -1,10 +1,10 @@
 import { Container, Box, Grid, Typography } from '@mui/material';
-import Emptystate from './Emptystate';
+import Emptystate from '../Components/products/Emptystate';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import CartItem from './CartItem';
-import CartSummary from './CartSummary';
+import CartItem from '../Components/products/CartItem';
+import CartSummary from '../Components/products/CartSummary';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementQuantity, incrementQuantity, removeFromCart } from '../../store/slices/cartSlice';
+import { decrementQuantity, incrementQuantity, removeFromCart } from '../store/slices/cartSlice';
 
 const CartPage = () => {
   const dispatch = useDispatch();

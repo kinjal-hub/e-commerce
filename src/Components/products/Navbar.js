@@ -14,8 +14,6 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },
-    { name: 'Button', path: '/button' },
-    {name: 'order', path: '/order'}
   ];
 
   const handleDrawerToggle = () => {
@@ -56,15 +54,15 @@ const Navbar = () => {
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ display:'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2}}>
-            <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: 'primary.contrastText', fontWeight: 'bold' }}>
               ShopHub
             </Typography>
-            <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '240px' }, justifyContent: 'center' }} >
+            <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '110px' }, justifyContent: 'center' }} >
               <Searchbar placeholder='Serach...'/>
             </Box>
           {isMobile ? (
               <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
-                <MenuIcon sx={{ color: 'text.secondary' }} />
+                <MenuIcon sx={{ color: 'primary.contrastText' }} />
               </IconButton>
             ) : (
               <Box>
@@ -76,7 +74,7 @@ const Navbar = () => {
                       component={Link} 
                       to={link.path} 
                       sx={{ 
-                        color: 'text.secondary', 
+                        color: 'primary.contrastText', 
                         ml: 2,
                         // Active Styles
                         borderBottom: isActive ? `2px solid ${theme.palette.secondary.main}` : 'none',

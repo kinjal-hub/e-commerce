@@ -29,6 +29,7 @@ const ProductGrid = ({items, loading, error}) => {
             price={p.price} 
             rating={p.rating} 
             inStock={p.inStock} 
+            brand={p.brand}
           />
         </Grid>
       ))}
