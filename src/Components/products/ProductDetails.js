@@ -1,10 +1,24 @@
 import React from 'react'
 import { Container, Paper, Box, Typography, Rating } from '@mui/material';
 import CustomButton from './CustomButton';
+import { useDispatch} from 'react-redux';
+import { addtoCart } from '../../store/slices/cartSlice';
+
 const ProductDetails = ({id, name, price, category, image, rating, reviews, inStock, stock, description, brand, colors, features }) => {
+  const dispatch = useDispatch();
+  const handleClick = (e) => {
+    e.stopPropagation();
+    dispatch(addtoCart({
+      id: id,
+      name: name,
+      price: price,
+      image: image,
+    }));
+
+  }
   return (
     <Container sx={{ mt: 5, mb: 5, minHeight: '80vh' }}>
-      <Paper elevation={3} sx={{ p: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4, alignItems: 'center' }}>
+      <Paper elevation={3} sx={{ p: 4, display: 'flex',  flexDirection: { xs: 'column', md: 'row' }, gap: 4, alignItems: 'stretch' }}>
          <Box
                    component="img"
                    src={image}
@@ -16,7 +30,7 @@ const ProductDetails = ({id, name, price, category, image, rating, reviews, inSt
                      objectFit: 'cover' 
                    }} 
                  />
-         <Box display="flex" flexDirection="column" gap={4} textAlign={{ xs: 'center', md: 'left' }}>
+         <Box display="flex" flexDirection="column" gap={4} justifyContent="flex-between" flex={1} textAlign={{ xs: 'center', md: 'left' }}>
                    <Typography variant="h3" fontWeight="bold" sx={{ color: 'text.secondary' }}>
                      {name}
                    </Typography>
@@ -43,7 +57,7 @@ const ProductDetails = ({id, name, price, category, image, rating, reviews, inSt
                      Features: {(features.join(', '))}
                    </Typography>
                    
-                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: { xs: 'left', md: 'flex-start' } }}>
                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                        {rating}
                      </Typography>
@@ -53,7 +67,7 @@ const ProductDetails = ({id, name, price, category, image, rating, reviews, inSt
                        {description}
                    </Typography>
                   
-                   <CustomButton variant="contained" label="Add To Cart" color="primary" size="large" sx={{ mt: 4, maxWidth: '200px', mx: { xs: 'auto', md: '0' } }} />
+                   <CustomButton onClick={handleClick} variant="contained" label="Add To Cart" color="primary" size="large" sx={{ mt: 4, maxWidth: '200px', mx: { xs: 'auto', md: '0' } }} />
                    
                  </Box>
                  
