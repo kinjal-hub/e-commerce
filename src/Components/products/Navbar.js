@@ -3,13 +3,15 @@ import { AppBar, Container, Typography, Button, List, ListItem, Toolbar, Box, Dr
 import { Link, useLocation } from 'react-router-dom'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import Searchbar from '../products/Searchbar';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import CartDrawer from './CartDrawer';
 
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation(); 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+  const [ cartOpen, setCartOpen ] = useState(false);
 
   const navLinks = [
     { name: 'Products', path: '/' },
@@ -60,6 +62,10 @@ const Navbar = () => {
             <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '110px' }, justifyContent: 'center' }} >
               <Searchbar placeholder='Serach...'/>
             </Box>
+            <IconButton color="inherit" onClick={() => setCartOpen(true)} sx={{ color: 'primary.contrastText' }}>
+              <LocalGroceryStoreIcon />
+            </IconButton>
+
           {isMobile ? (
               <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
                 <MenuIcon sx={{ color: 'primary.contrastText' }} />
@@ -95,6 +101,7 @@ const Navbar = () => {
       <Drawer anchor="right" open={isMobile && drawerOpen} onClose={handleDrawerToggle}>
         <Box sx={{ width: 250 }}>{drawer}</Box>
       </Drawer>
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       <Toolbar />
     </>
   );
