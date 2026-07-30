@@ -3,8 +3,7 @@ import { Drawer, Typography, Box, Grid, Stack, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeFromCart } from '../../store/slices/cartSlice';
-import Emptystate from './Emptystate';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import Loader from './Loader';
 import CartItem from './CartItem';
 import CustomButton from './CustomButton';
 const CartDrawer = ({ open, onClose }) => {
@@ -13,7 +12,6 @@ const CartDrawer = ({ open, onClose }) => {
     const cartItems = useSelector((state) => state.cart.items);
     const Total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const handleonIncrement = (id) => {
-       console.log("after increment:", id);
        dispatch(incrementQuantity(id));
       };
     
@@ -35,15 +33,15 @@ const CartDrawer = ({ open, onClose }) => {
 
   return (
     <Drawer anchor='right' open={open} onClose={onClose}>
-      <Stack spacing={1.5} sx={{p:2}}>
-       <Typography variant='h5' align='center'>
+      <Stack spacing={50} direction='row'  alignItems='center' sx={{p:2}}>
+       <Typography variant='h5'>
          Your Cart
        </Typography>
-       <CustomButton color='primary' label='X' variant='contained'   fullWidth onClick={onClose}/> 
+       <CustomButton color='primary' label='X' variant='contained' onClick={onClose}/> 
        </Stack>
        {cartItems.length ===  0 ? (
                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                 <Emptystate icon={<ProductionQuantityLimitsIcon />} title="Failed to fetch data.." message={"can't find any product..."} />
+                 <Loader  message='Cart is Empty.'/>
                </Box>
              ) : (
                
@@ -71,8 +69,8 @@ const CartDrawer = ({ open, onClose }) => {
              )}
              <Stack spacing={1.5} sx={{p:2}}>
             
-             <CustomButton color='primary' variant='contained' label='View Cart'  fullWidth  onclick={handleViewCart} />
-             <CustomButton color='primary' variant='contained' label='Checkout'  fullWidth  onclick={handleCheckout} /> 
+             <CustomButton color='primary' variant='contained' label='View Cart'  fullWidth  onClick={handleViewCart} />
+             <CustomButton color='primary' variant='contained' label='Checkout'  fullWidth  onClick={handleCheckout} /> 
             
              </Stack>
     </Drawer>

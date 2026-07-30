@@ -21,7 +21,6 @@ export const fetchProducts = createAsyncThunk(
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      console.log(data)
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,7 +37,6 @@ export const fetchSpecificProduct = createAsyncThunk(
         throw new Error('Failed to fetch product detail');
       }
       const data = await response.json();
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

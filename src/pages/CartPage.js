@@ -10,11 +10,9 @@ const CartPage = () => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
 
   const handleonIncrement = (id) => {
-   console.log("after increment:", id);
    dispatch(incrementQuantity(id));
   };
 

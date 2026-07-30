@@ -19,12 +19,12 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
-    console.log("before dispatch", addtoCart({
+    addtoCart({
         id: id,
         name: name,
         price: price,
         image: image,
-      }));
+      });
     e.stopPropagation();
     dispatch(
       addtoCart({
@@ -34,7 +34,7 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
         image: image,
       }),
     );
-    console.log("after dispatch", dispatch(addtoCart));
+    
   };
 
   return (

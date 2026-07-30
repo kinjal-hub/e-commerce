@@ -7,5 +7,15 @@ const store = configureStore({
         cart: cartReducer,
      }
 });
+store.subscribe (() => {
+   try {
+      const  cartState = store.getState().cart;
+      const serializedState = JSON.stringify(cartState);
+      localStorage.setItem("cart", serializedState);
+   } catch(err){
+      console.error("Could not save cart state to localStorage", err);
+   }
+  
+})
 
 export default store;

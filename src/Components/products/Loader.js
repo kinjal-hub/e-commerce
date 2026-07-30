@@ -13,9 +13,9 @@ const Loader = ({size, message}) => {
       p: 2,
       mt: '8px'
     }}>
-    <CircularProgress size={size} color='secondary' message={message}/>
+    <CircularProgress size={size} color='primary' message={message}/>
        {message && (
-        <Typography variant='body1' color='secondary'>
+        <Typography variant='body1' color='primary'>
           {message}
         </Typography>
        )}

@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { 
-  items: [], 
-  totalQuantity: 0, 
-  totalPrice: 0 
+const loadCartState = () => {
+  try {
+    const serializedState = localStorage.getItem("cart");
+    if (serializedState === null) {
+      return { items: [], totalQuantity: 0, totalPrice: 0 };
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return ('Not any item added in Cart', err);
+  }
 };
+
+const initialState = loadCartState();
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -21,6 +29,7 @@ const cartSlice = createSlice({
       } else {
         existingProduct.quantity++;
       }
+      
     },
     incrementQuantity: (state, action) => {
       const id = action.payload;
@@ -31,6 +40,7 @@ const cartSlice = createSlice({
         state.totalQuantity++; 
         state.totalPrice += existingProduct.price;
       }
+      
     },
     decrementQuantity: (state, action) => {
       const id = action.payload;
@@ -45,6 +55,7 @@ const cartSlice = createSlice({
           state.items = state.items.filter(item => item.id !== id);
         }
       }
+      
     },
     removeFromCart: (state, action) => {
       const id = action.payload;
@@ -55,14 +66,18 @@ const cartSlice = createSlice({
         state.totalPrice -= existingProduct.price * existingProduct.quantity; 
         state.items = state.items.filter(item => item.id !== id); 
       }
+      
     },
     clearCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
       state.totalPrice = 0;
+      
     }
   },
 });
 
 export const { addtoCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
+
+
