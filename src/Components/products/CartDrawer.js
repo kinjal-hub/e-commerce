@@ -33,7 +33,7 @@ const CartDrawer = ({ open, onClose }) => {
 
   return (
     <Drawer anchor='right' open={open} onClose={onClose}>
-      <Stack spacing={50} direction='row'  alignItems='center' sx={{p:2}}>
+      <Stack sx={{ p:2, display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems: 'center', width:'93%'}}>
        <Typography variant='h5'>
          Your Cart
        </Typography>
