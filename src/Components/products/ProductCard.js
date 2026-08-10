@@ -13,10 +13,11 @@ import CustomButton from "./CustomButton";
 import { useNavigate } from "react-router-dom";
 import { addtoCart } from "../../store/slices/cartSlice";
 import { useDispatch } from "react-redux";
-
+import { showNotification } from "../../store/slices/notificationSlice";
 const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   const handleAddToCart = (e) => {
     addtoCart({
@@ -26,6 +27,13 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
         image: image,
       });
     e.stopPropagation();
+    if(!inStock) {
+      dispatch(showNotification({
+        message: "Out of stock",
+        severity: "error"
+      }))
+      return;
+    }
     dispatch(
       addtoCart({
         id: id,
@@ -33,6 +41,10 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
         price: price,
         image: image,
       }),
+      dispatch(
+        showNotification({
+           message: "Added to cart", severity: "success"
+      })),
     );
     
   };
@@ -71,6 +83,7 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
               fontWeight: "bold",
             }}
           />
+          
         )}
         <CardMedia
           component="img"

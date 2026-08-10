@@ -5,7 +5,7 @@ import CartItem from '../Components/products/CartItem';
 import CartSummary from '../Components/products/CartSummary';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeFromCart } from '../store/slices/cartSlice';
-
+import { showNotification } from '../store/slices/notificationSlice'; 
 const CartPage = () => {
   const dispatch = useDispatch();
 
@@ -22,6 +22,7 @@ const CartPage = () => {
 
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
+    dispatch(showNotification({message: "Item removed", severity: "info" }));
   };
 
   const handleCheckout = () => {

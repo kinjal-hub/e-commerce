@@ -3,7 +3,7 @@ import { Container, Paper, Box, Typography, Rating } from '@mui/material';
 import CustomButton from './CustomButton';
 import { useDispatch} from 'react-redux';
 import { addtoCart } from '../../store/slices/cartSlice';
-
+import { showNotification } from '../../store/slices/notificationSlice';
 const ProductDetails = ({id, name, price, category, image, rating, reviews, inStock, stock, description, brand, colors, features }) => {
   const dispatch = useDispatch();
   const handleClick = (e) => {
@@ -14,8 +14,11 @@ const ProductDetails = ({id, name, price, category, image, rating, reviews, inSt
       price: price,
       image: image,
     }));
-
-  }
+    dispatch(showNotification({ 
+            message: "Added to cart", 
+            severity: "success" 
+    }));
+   }
   return (
     <Container sx={{ mt: 5, mb: 5, minHeight: '80vh' }}>
       <Paper elevation={3} sx={{ p: 4, display: 'flex',  flexDirection: { xs: 'column', md: 'row' }, gap: 4, alignItems: 'stretch' }}>
