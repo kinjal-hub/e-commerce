@@ -17,19 +17,19 @@ const NotificationSnackbar = () => {
   };
 
   return (
-    <div>
-    
+    <div >
       <Snackbar
         key={id}
         open={open}
         autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}}
+        
       >
         <Alert 
         onClose={handleClose} 
-        severity={severity} 
-        variant="filled" 
+        severity={ severity || 'info'} 
+        variant="standard" 
         sx={{ width: '100%' }}
       >
         {message}

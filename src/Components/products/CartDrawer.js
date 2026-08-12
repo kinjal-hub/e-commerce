@@ -3,7 +3,6 @@ import { Drawer, Typography, Box, Grid, Stack, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeFromCart } from '../../store/slices/cartSlice';
-import Loader from './Loader';
 import CartItem from './CartItem';
 import CustomButton from './CustomButton';
 const CartDrawer = ({ open, onClose }) => {
@@ -40,8 +39,8 @@ const CartDrawer = ({ open, onClose }) => {
        <CustomButton color='primary' label='X' variant='contained' onClick={onClose}/> 
        </Stack>
        {cartItems.length ===  0 ? (
-               <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                 <Loader  message='Cart is Empty.'/>
+               <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height:'80%' }}>
+                 <Typography variant='h6' alignItems='center' >Your Cart is Empty.</Typography>
                </Box>
              ) : (
                
