@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../store/slices/notificationSlice';
 const NotificationSnackbar = () => {
 
-    const dispatch = useDispatch();
-    const { open, message, severity, id } = useSelector((state) => state.notification);
+  const dispatch = useDispatch();
+  const { open, message, severity, id } = useSelector((state) => state.notification);
 
 
 
-    const handleClose = (event, reason) => {
+  const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -23,17 +23,18 @@ const NotificationSnackbar = () => {
         open={open}
         autoHideDuration={3000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}}
-        
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ mt: '65px' }}
+
       >
-        <Alert 
-        onClose={handleClose} 
-        severity={ severity || 'info'} 
-        variant="standard" 
-        sx={{ width: '100%' }}
-      >
-        {message}
-      </Alert>
+        <Alert
+          onClose={handleClose}
+          severity={severity || 'info'}
+          variant="standard"
+          sx={{ width: '100%', backgroundColor: 'primary.main', color: 'warning.contrastText' }}
+        >
+          {message}
+        </Alert>
       </Snackbar>
     </div>
   )
