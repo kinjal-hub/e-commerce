@@ -32,6 +32,7 @@ const CartDrawer = ({ open, onClose }) => {
 
   return (
     <Drawer anchor='right' open={open} onClose={onClose}>
+      <Box sx = {{ width: { xs: '80vw', sm: '500px' },display: 'flex', flexDirection: 'column', height: '100%', boxSizing: 'border-box',}}>
       <Stack sx={{ p:2, display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems: 'center', width:'93%'}}>
        <Typography variant='h5'>
          Your Cart
@@ -72,6 +73,7 @@ const CartDrawer = ({ open, onClose }) => {
              <CustomButton color='primary' variant='contained' label='Checkout'  fullWidth  onClick={handleCheckout} /> 
             
              </Stack>
+             </Box>
     </Drawer>
   )
 }

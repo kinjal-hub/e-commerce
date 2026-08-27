@@ -17,7 +17,7 @@ const Navbar = () => {
     { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },
   ];
-
+ 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -108,5 +108,11 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
 
 

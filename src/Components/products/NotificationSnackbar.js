@@ -1,4 +1,4 @@
-import { Snackbar, Alert } from '@mui/material';
+import { Box ,Snackbar, Alert } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../store/slices/notificationSlice';
 const NotificationSnackbar = () => {
@@ -17,7 +17,7 @@ const NotificationSnackbar = () => {
   };
 
   return (
-    <div >
+    <Box >
       <Snackbar
         key={id}
         open={open}
@@ -31,12 +31,12 @@ const NotificationSnackbar = () => {
           onClose={handleClose}
           severity={severity || 'info'}
           variant="standard"
-          sx={{ width: '100%', backgroundColor: 'primary.main', color: 'warning.contrastText' }}
+          sx={{ width: '100%', backgroundColor: 'primary.main', color: 'error.contrastText' }}
         >
           {message}
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   )
 }
 
