@@ -6,16 +6,16 @@ const theme = createTheme({
   ...baseTheme,
   palette: {
     primary: {
-      light: "#FFEDCE",
-      main: "#FFC193",
-      dark: "#FF3737",
-      contrastText: "#FF8383",
+      light: "#C4B5FD",
+      main: "#7C3AED",
+      dark: "#5B21B6",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      light: "#ff7043",
-      main: "#D84315",
-      dark: "#9b2c0d",
-      contrastText: "#ffffff",
+      light: "#FFB199",
+      main: "#FF6B4A",
+      dark: "#D8431F",
+      contrastText: "#FFFFFF",
     },
     error: {
       main: "#f44336",
@@ -34,14 +34,26 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     background: {
-      default: "#FFEDCE",
-      paper: "#FFF3E0",
+      default: "#FAFAFC",
+      paper: "#FFFFFF",
     },
     text: {
-      primary: "#FF8383",
-      secondary: "#FF3737",
-      disabled: "#FFC193",
-      hint: "#FFEDCE",
+      primary: "#1A1A2E",
+      secondary: "#5C5C7A",
+      disabled: "#B0B0C3",
+      hint: "#B0B0C3",
+    },
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            boxShadow: 10, // Adjust elevation level (0-24)
+            transform: "scale(1.02)", // Slightly enlarge the card
+          },
+        },
+      },
     },
   },
   typography: {
@@ -51,48 +63,48 @@ const theme = createTheme({
       fontSize: baseTheme.typography.h1.fontSize,
       lineHeight: 1.2,
       letterSpacing: "-0.01562em",
-      color: "#FF8383",
+      color: "#1A1A2E",
     },
     h2: {
       fontWeight: 600,
       fontSize: baseTheme.typography.h2.fontSize,
       lineHeight: 1.3,
       letterSpacing: "-0.00833em",
-      color: "#FF8383",
+      color: "#1A1A2E",
     },
     h3: {
       fontWeight: 600,
       fontSize: baseTheme.typography.h3.fontSize,
       lineHeight: 1.4,
-      color: "#FF8383",
+      color: "#1A1A2E",
     },
     body1: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.body1.fontSize,
       lineHeight: 1.5,
-      color: "#FF8383",
+      color: "#1A1A2E",
     },
     body2: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.button.fontSize,
       lineHeight: 1.43,
-      color: "#FF3737",
+      color: "#5C5C7A",
     },
     button: {
       fontWeight: baseTheme.typography.fontWeightBold,
       fontSize: baseTheme.typography.button.fontSize,
       letterSpacing: "0.02857em",
       textTransform: "uppercase",
-      color: "#FFC193",
+      color: "#7C3AED",
     },
     caption: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.caption.fontSize,
-      color: "#FF8383",
+      color: "#5C5C7A",
     },
     action: {
-        selected: 'transparent',
-    }
+      selected: "transparent",
+    },
   },
   shape: {
     borderRadius: 8,
