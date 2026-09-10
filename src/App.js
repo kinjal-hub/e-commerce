@@ -6,7 +6,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import NotificationSnackbar  from './Components/products/NotificationSnackbar';
 import Products from './pages/ProductPage';
 import CartPage from './pages/CartPage';
-
+import WishlistPage from './pages/WishlistPage';
 
 
 
@@ -27,7 +27,7 @@ function App() {
             <Route path='/products/:id' element={<ProductDetailPage />} />
             <Route path='/' element={<Products />} />
             <Route path='/cart' element={<CartPage />} />
-            
+            <Route path='/wishlist' element={<WishlistPage />} />
             
           </Routes>
       </ThemeProvider>

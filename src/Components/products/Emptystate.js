@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material'
 import React from 'react'
 
-const Emptystate = ({icon, title, message, actionButton}) => {
+const Emptystate = ({icon, title, message}) => {
   return (
     <Box
     sx={{

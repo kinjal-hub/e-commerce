@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { AppBar, Container, Typography, Button, List, ListItem, Toolbar, Box, Drawer, IconButton, ListItemText, useTheme, useMediaQuery } from '@mui/material';
+import { AppBar, Container, Typography, Button, List, ListItem, Toolbar, Box, Drawer, IconButton, ListItemText, useTheme, useMediaQuery, Badge } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import Searchbar from '../products/Searchbar';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CartDrawer from './CartDrawer';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Navbar = () => {
   const theme = useTheme();
@@ -12,7 +13,7 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [ cartOpen, setCartOpen ] = useState(false);
-
+  const wishlistCount = 4;
   const navLinks = [
     { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },
@@ -62,9 +63,23 @@ const Navbar = () => {
             <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '110px' }, justifyContent: 'center' }} >
               <Searchbar placeholder='Serach...'/>
             </Box>
-            <IconButton color="inherit" onClick={() => setCartOpen(true)} sx={{ color: 'primary.contrastText' }}>
-              <LocalGroceryStoreIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+              <IconButton 
+                color="inherit" 
+                component={Link} 
+                to="/wishlist" 
+                sx={{ color: 'primary.contrastText' }}
+              >
+                <Badge badgeContent={wishlistCount} color="info" >
+                  <FavoriteBorderIcon />
+                </Badge>
+              </IconButton>
+
+              <IconButton color="inherit" onClick={() => setCartOpen(true)} sx={{ color: 'primary.contrastText' }}>
+                <LocalGroceryStoreIcon />
+              </IconButton>
+
+            </Box>
 
           {isMobile ? (
               <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>

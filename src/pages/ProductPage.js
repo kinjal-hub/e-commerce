@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../store/slices/productsSlice';
 import ProductGrid from '../Components/products/ProductGrid';
@@ -11,9 +12,9 @@ const ProductPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <Box>
       <ProductGrid items={items} loading={loading} error={error}/>
-    </div>
+    </Box>
   );
 };
 

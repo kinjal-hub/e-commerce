@@ -1,4 +1,5 @@
 import React from "react";
+import WishListButton from "./WishListButton";
 import {
   Card,
   CardMedia,
@@ -157,13 +158,14 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
           </Box>
         </CardContent>
         <CardActions>
-          <Box sx={{ p: 1, width: "100%" }}>
+          <Box sx={{ p: 0.5, display:'flex', justifyContent:'space-between', width:'100%' }}>
           <CustomButton
             label="Add To Cart"
             onClick={handleAddToCart}
             variant="contained"
             color="primary.dark"
           />
+          <WishListButton productId={id} /> 
           </Box>
         </CardActions>
       </Card>

@@ -4,6 +4,7 @@ import CustomButton from './CustomButton';
 import { useDispatch } from 'react-redux';
 import { addtoCart } from '../../store/slices/cartSlice';
 import { showNotification } from '../../store/slices/notificationSlice';
+import WishListButton from "./WishListButton";
 
 const ProductDetails = ({ id, name, price, category, image, rating, reviews, inStock, stock, description, brand, colors, features }) => {
   const dispatch = useDispatch();
@@ -90,7 +91,7 @@ const ProductDetails = ({ id, name, price, category, image, rating, reviews, inS
           <Typography variant="h6" sx={{ color: 'text.secondary' }}>
             {description}
           </Typography>
-          <Box sx={{ mt: '35px'}}>
+          <Box sx={{ mt: '35px', display:'flex', justifyContent:'space-between', width:'100%' }}>
           <CustomButton 
             onClick={handleClick} 
             variant="contained" 
@@ -99,6 +100,7 @@ const ProductDetails = ({ id, name, price, category, image, rating, reviews, inS
             size="large" 
             sx={{ mt: 'auto', maxWidth: '200px', mx: { xs: 'auto', md: '0' }, width: '100%' }} 
           />
+          <WishListButton productId={id} /> 
           </Box>
         </Box>
       </Paper>
