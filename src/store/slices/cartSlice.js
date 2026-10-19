@@ -7,7 +7,8 @@ const loadCartState = () => {
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    return ('Not any item added in Cart', err);
+    console.error('Not any item added in Cart', err);
+    return { items: [], totalQuantity: 0, totalPrice: 0 };
   }
 };
 

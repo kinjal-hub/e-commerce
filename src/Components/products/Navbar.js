@@ -6,14 +6,14 @@ import Searchbar from '../products/Searchbar';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CartDrawer from './CartDrawer';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import { useSelector } from 'react-redux';
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation(); 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [ cartOpen, setCartOpen ] = useState(false);
-  const wishlistCount = 4;
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
   const navLinks = [
     { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },

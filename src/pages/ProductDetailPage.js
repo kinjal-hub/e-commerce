@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchSpecificProduct } from '../store/slices/productsSlice';
+import { clearSelectedProduct, fetchSpecificProduct } from '../store/slices/productsSlice';
 import Loader from '../Components/products/Loader';
 import ProductDetails from '../Components/products/ProductDetails';
 
@@ -12,16 +12,19 @@ const {id} = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
      dispatch(fetchSpecificProduct(id));
+     return () => {
+      dispatch(clearSelectedProduct())
+     };
   }, [dispatch, id]);
 
-  const { items, loading, error } = useSelector((state) => state.products)
-
+  const { selectedProduct, loading, error } = useSelector((state) => state.products)
+   
   if (loading)
   {
     return <Loader />
   } 
   if (error) return <p>Error: {error}</p>;
-  const product = items.find((i) => i.id === parseInt(id));
+  const product = selectedProduct?.data ? selectedProduct.data : selectedProduct;
 
   if (!product) {
     return (

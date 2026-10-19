@@ -21,12 +21,6 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
   
 
   const handleAddToCart = (e) => {
-    addtoCart({
-        id: id,
-        name: name,
-        price: price,
-        image: image,
-      });
     e.stopPropagation();
     if(!inStock) {
       dispatch(showNotification({
@@ -42,11 +36,11 @@ const ProductCard = ({ id, name, price, image, rating, inStock, brand }) => {
         price: price,
         image: image,
       }),
-      dispatch(
+    );
+    dispatch(
         showNotification({
            message: "Added to cart", severity: "success"
-      })),
-    );
+    }));
     
   };
 

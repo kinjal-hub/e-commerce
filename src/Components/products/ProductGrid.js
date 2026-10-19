@@ -22,7 +22,7 @@ const ProductGrid = ({ items, loading, error }) => {
     <Grid 
       container 
       spacing={2} 
-      sx={{ mt: '10px', px: { xs: 9, sm: 3, md: 5}, width: '100%',  overflowX:'hidden'}} 
+      sx={{ mt: '10px', px: { xs: 6.5, sm: 3, md: 5}, width: '100%',  overflowX:'hidden'}} 
        justifyContent='center' 
       alignItems='stretch'
     >

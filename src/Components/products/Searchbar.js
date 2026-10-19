@@ -12,7 +12,6 @@ const Searchbar = ({ onSearch, placeholder }) => {
       if (onSearch) {
         onSearch(searchTerm);
       }
-      console.log(searchTerm)
     }, 300); 
 
     return () => clearTimeout(timer);
