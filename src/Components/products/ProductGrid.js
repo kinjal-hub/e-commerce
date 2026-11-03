@@ -1,19 +1,23 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import ProductCard from './ProductCard';
+import Emptystate from './Emptystate';
 import Loader from './Loader';
+import { useSelector } from 'react-redux';
+import { selectFilteredProducts } from '../../store/slices/productsSlice';
 
-const ProductGrid = ({ items, loading, error }) => {
+const ProductGrid = ({  loading, error }) => {
+  const filteredProducts = useSelector(selectFilteredProducts);
   if (loading) {
     return <Loader />;
   }
   if (error) {
     return <Typography>Error: {'Failed to fetch product'}</Typography>;
   }
-  if (!items || items.length === 0) {
+  if (!filteredProducts || filteredProducts.length === 0) {
     return (
-      <Typography variant='h5' sx={{ justifySelf: 'center', color: 'text.secondary' }}>
-        No products found.
+      <Typography variant='h5' sx={{ justifySelf: 'center',  }}>
+        <Emptystate sx={{color: 'text.secondary'}} message="Specific product u found not match"/>
       </Typography>
     );
   }
@@ -22,11 +26,11 @@ const ProductGrid = ({ items, loading, error }) => {
     <Grid 
       container 
       spacing={2} 
-      sx={{ mt: '10px', px: { xs: 6.5, sm: 3, md: 5}, width: '100%',  overflowX:'hidden'}} 
+      sx={{ mt: {xs:'20px', md: '110px'}, px: { xs: 6.5, sm: 3, md: 5}, width: '100%',  overflowX:'hidden'}} 
        justifyContent='center' 
       alignItems='stretch'
     >
-      {items.map((p) => (
+      {filteredProducts.map((p) => (
         <Grid 
           item 
           key={p.id}  

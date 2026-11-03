@@ -2,16 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
-  selectedProduct: null, // 👈 Added to store the single product view data
+  selectedProduct: null,
   loading: false,
   error: null,
   filters: {
     search: '',
     category: '',
-    priceRange: '',
+    priceRange: {
+      min: null,
+      max: null,
+    },
+    inStockOnly: false,
   }
 };
+
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (_, { rejectWithValue }) => {
@@ -37,7 +43,7 @@ export const fetchSpecificProduct = createAsyncThunk(
         throw new Error('Failed to fetch product detail');
       }
       const data = await response.json();
-      return data; // Make sure this returns the product object directly (or adjust based on API response structure)
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -65,21 +71,26 @@ const productsSlice = createSlice({
     setCategoryFilter: (state, action) => {
       state.filters.category = action.payload;
     },
-    clearFilters: (state, action) => {
+    setPriceRange: (state, action) => {
+      state.filters.priceRange = action.payload;
+    },
+    setInStockOnly: (state, action) => {
+      state.filters.inStockOnly = action.payload;
+    },
+    clearFilters: (state) => {
       state.filters = {
         search: '',
         category: '',
-        priceRange: ''
-      }
+        priceRange: { min: null, max: null },
+        inStockOnly: false,
+      };
     },
-    
     clearSelectedProduct: (state) => {
       state.selectedProduct = null;
     }
   },
   extraReducers: (builder) => {
     builder
-      // Fetch All Products Cases
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -92,14 +103,12 @@ const productsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      
-      
       .addCase(fetchSpecificProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchSpecificProduct.fulfilled, (state, action) => {
-        state.selectedProduct = action.payload; // Saves the product into state
+        state.selectedProduct = action.payload;
         state.loading = false;
       })
       .addCase(fetchSpecificProduct.rejected, (state, action) => {
@@ -109,12 +118,40 @@ const productsSlice = createSlice({
   }
 });
 
+
+export const selectFilteredProducts = (state) => {
+  const { items, filters } = state.products;
+  const { search, category, priceRange, inStockOnly } = filters;
+
+  const trimmedSearch = search.trim().toLowerCase();
+
+  return items.filter((product) => {
+    if (trimmedSearch) {
+      const matchName = product.name?.toLowerCase().includes(trimmedSearch);
+      const matchBrand = product.brand?.toLowerCase().includes(trimmedSearch);
+      if (!matchName && !matchBrand) return false;
+    }
+
+    if (category && category !== 'All') {
+      if (product.category !== category) return false;
+    }
+
+    if (priceRange.min !== null && product.price < priceRange.min) return false;
+    if (priceRange.max !== null && product.price > priceRange.max) return false;
+    
+    if (inStockOnly && !product.inStock) return false;
+    return true;
+  });
+};
+
 export const {
   setProducts,
   setLoading,
   setError,
   setSearchFilter,
   setCategoryFilter,
+  setPriceRange,
+  setInStockOnly,
   clearFilters,
   clearSelectedProduct
 } = productsSlice.actions;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-
 const Searchbar = ({ onSearch, placeholder }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -46,6 +45,7 @@ const Searchbar = ({ onSearch, placeholder }) => {
         },
       }}
       sx={{
+        ml: '5px',
         width: '100%', 
         maxWidth: { sm: '400px' }, 
         color: 'text.secondary',

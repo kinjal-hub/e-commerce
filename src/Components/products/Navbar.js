@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AppBar, Container, Typography, Button, List, ListItem, Toolbar, Box, Drawer, IconButton, ListItemText, useTheme, useMediaQuery, Badge } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom'; 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -6,10 +6,13 @@ import Searchbar from '../products/Searchbar';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CartDrawer from './CartDrawer';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchFilter } from '../../store/slices/productsSlice';
+import ProductsFilter from '../../Components/products/ProductsFilter';
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation(); 
+  const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [ cartOpen, setCartOpen ] = useState(false);
@@ -22,6 +25,9 @@ const Navbar = () => {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
+  const handleSerach = useCallback((term) => {
+    dispatch(setSearchFilter(term));
+  },[dispatch]);
 
   const drawer = (
     <List>
@@ -56,14 +62,15 @@ const Navbar = () => {
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ display:'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2}}>
-            <Typography variant="h6" sx={{ color: 'primary.contrastText', fontWeight: 'bold' }}>
+          <Toolbar disableGutters sx={{ display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Typography variant="h6" sx={{ color: 'primary.contrastText', fontWeight: 'bold' , fontSize: {xs: 'body2', md: 'h6'}}}>
               ShopHub
             </Typography>
-            <Box sx={{ display: 'flex', flexGrow: 1,  ml: { xs: 0, md: '110px' }, justifyContent: 'center' }} >
-              <Searchbar placeholder='Serach...'/>
+            <Box sx={{ display: 'flex', flexGrow: 1, gap: 1,  ml: { xs: 2, md: '100px' }, alignItems: 'center' }} >
+              <Searchbar placeholder='Search' onSearch={handleSerach}/>
+                <ProductsFilter />
             </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.1 }}>
               <IconButton 
                 color="inherit" 
                 component={Link} 
