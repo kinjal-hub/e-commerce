@@ -2,22 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-const Searchbar = ({ onSearch, placeholder }) => {
-  const [searchTerm, setSearchTerm] = useState("");
 
-  // debouncing
+const Searchbar = ({ value, onSearch, placeholder }) => {
+  const [searchTerm, setSearchTerm] = useState(value ?? '');
+
+ 
+  useEffect(() => {
+    if (value === '') {
+      setSearchTerm('');
+    }
+  }, [value]);
+
+  // Debouncing
   useEffect(() => {
     const timer = setTimeout(() => {
       if (onSearch) {
         onSearch(searchTerm);
       }
-    }, 300); 
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [searchTerm, onSearch]);
 
   const handleClear = () => {
-    setSearchTerm("");
+    setSearchTerm('');
   };
 
   return (
@@ -38,17 +46,20 @@ const Searchbar = ({ onSearch, placeholder }) => {
           endAdornment: searchTerm && (
             <InputAdornment position="end">
               <IconButton size="small" onClick={handleClear}>
-                <ClearIcon fontSize="small" />
+                <ClearIcon aria-label="Clear search" fontSize="small" />
               </IconButton>
             </InputAdornment>
           ),
         },
       }}
       sx={{
-        ml: '5px',
-        width: '100%', 
-        maxWidth: { sm: '400px' }, 
-        color: 'text.secondary',
+        width: '100%',
+        maxWidth: { md: 480 },
+        '& .MuiOutlinedInput-root': {
+          bgcolor: 'background.paper',
+          borderRadius: 999,
+          '& fieldset': { border: 'none' },
+        },
       }}
     />
   );

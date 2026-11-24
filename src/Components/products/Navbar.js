@@ -8,7 +8,8 @@ import CartDrawer from './CartDrawer';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchFilter } from '../../store/slices/productsSlice';
-import ProductsFilter from '../../Components/products/ProductsFilter';
+
+
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation(); 
@@ -17,6 +18,7 @@ const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [ cartOpen, setCartOpen ] = useState(false);
   const wishlistCount = useSelector((state) => state.wishlist.items.length);
+  const Search = useSelector((state) => state.products.filters.search);
   const navLinks = [
     { name: 'Products', path: '/' },
     { name: 'Cart', path: '/cart' },
@@ -60,16 +62,20 @@ const Navbar = () => {
 
   return ( 
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'primary.main' }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Typography variant="h6" sx={{ color: 'primary.contrastText', fontWeight: 'bold' , fontSize: {xs: 'body2', md: 'h6'}}}>
-              ShopHub
-            </Typography>
-            <Box sx={{ display: 'flex', flexGrow: 1, gap: 1,  ml: { xs: 2, md: '100px' }, alignItems: 'center' }} >
-              <Searchbar placeholder='Search' onSearch={handleSerach}/>
-                <ProductsFilter />
-            </Box>
+      <AppBar position="sticky">
+      <Container maxWidth="xl">
+      <Toolbar disableGutters sx={{ gap: 2 }}>
+      <Typography variant="h6" fontWeight="bold" sx={{ color: 'primary.contrastText' }}>
+        ShopHub
+      </Typography>
+
+      {!isMobile && (
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+          <Searchbar placeholder="Search products..." onSearch={handleSerach} value={Search} />
+        </Box>
+      )}
+      {isMobile && <Box sx={{ flexGrow: 1 }} />}
+
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.1 }}>
               <IconButton 
                 color="inherit" 
@@ -118,13 +124,19 @@ const Navbar = () => {
               </Box>
             )}
           </Toolbar>
+          {isMobile && (
+            <Box sx={{ pb: 1.5 }}>
+              <Searchbar placeholder="Search products..." onSearch={handleSerach} value={Search} />
+           </Box>
+          )}
+
         </Container>
       </AppBar>
       <Drawer anchor="right" open={isMobile && drawerOpen} onClose={handleDrawerToggle}>
         <Box sx={{ width: 250 }}>{drawer}</Box>
       </Drawer>
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
-      <Toolbar />
+    
     </>
   );
 };

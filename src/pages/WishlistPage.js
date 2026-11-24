@@ -27,14 +27,14 @@ const WishlistPage = () => {
   
   if (loading && wishlistedProducts.length === 0) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+      <Box  display="flex" justifyContent="center" alignItems="center"  minHeight="50vh">
         <Loader />
       </Box>
     );
   }
 
   return (
-    <Box>
+    <Box sx={{ mt: '20px'}}>
       {wishlistedProducts.length === 0 ? (
         <Emptystate message="Your wishlist is empty" />
       ) : (

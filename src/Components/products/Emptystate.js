@@ -9,7 +9,7 @@ const Emptystate = ({icon, title, message}) => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '80vh',
+      minHeight: '40vh',
       gap: 2,
       p: 2,
       mt: '8px',
@@ -20,10 +20,10 @@ const Emptystate = ({icon, title, message}) => {
         <Box sx={{ color: 'text.secondary'}}>
             {icon}
         </Box>
-        <Typography variant='h5'>
+        <Typography variant='h6'>
             {title}
         </Typography>
-        <Typography variant='h5'>
+        <Typography variant='body1'>
             {message}
         </Typography>
     </Stack>

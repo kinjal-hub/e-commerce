@@ -45,17 +45,18 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          "&:hover": {
-            boxShadow: 10, // Adjust elevation level (0-24)
-            transform: "scale(1.02)", // Slightly enlarge the card
-          },
+   MuiCard: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        transition: theme.transitions.create(['box-shadow', 'transform']),
+        '&:hover': {
+          boxShadow: theme.shadows[8],
+          transform: 'translateY(-2px)',
         },
-      },
+      }),
     },
   },
+},
   typography: {
     fontFamily: baseTheme.typography.fontFamily,
     h1: {
@@ -63,59 +64,43 @@ const theme = createTheme({
       fontSize: baseTheme.typography.h1.fontSize,
       lineHeight: 1.2,
       letterSpacing: "-0.01562em",
-      color: "#1A1A2E",
     },
     h2: {
       fontWeight: 600,
       fontSize: baseTheme.typography.h2.fontSize,
       lineHeight: 1.3,
       letterSpacing: "-0.00833em",
-      color: "#1A1A2E",
     },
     h3: {
       fontWeight: 600,
       fontSize: baseTheme.typography.h3.fontSize,
       lineHeight: 1.4,
-      color: "#1A1A2E",
     },
     body1: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.body1.fontSize,
       lineHeight: 1.5,
-      color: "#1A1A2E",
     },
     body2: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.button.fontSize,
       lineHeight: 1.43,
-      color: "#5C5C7A",
     },
     button: {
       fontWeight: baseTheme.typography.fontWeightBold,
       fontSize: baseTheme.typography.button.fontSize,
       letterSpacing: "0.02857em",
       textTransform: "uppercase",
-      color: "#7C3AED",
     },
     caption: {
       fontWeight: baseTheme.typography.fontWeightRegular,
       fontSize: baseTheme.typography.caption.fontSize,
-      color: "#5C5C7A",
-    },
-    action: {
-      selected: "transparent",
     },
   },
   shape: {
     borderRadius: 8,
   },
-  shadows: [
-    "none", // shadows[0]
-    "0px 1px 3px rgba(0,0,0,0.2), 0px 1px 1px rgba(0,0,0,0.14), 0px 2px 1px rgba(0,0,0,0.12)", // shadows[1]
-    "0px 1px 5px rgba(0,0,0,0.2), 0px 2px 2px rgba(0,0,0,0.14), 0px 3px 1px rgba(0,0,0,0.12)", // shadows[2]
-    "0px 1px 8px rgba(0,0,0,0.2), 0px 3px 4px rgba(0,0,0,0.14), 0px 3px 3px rgba(0,0,0,0.12)", // shadows[3]
-    "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px rgba(0,0,0,0.14), 0px 1px 10px rgba(0,0,0,0.12)", // shadows[4]
-  ],
+  
 });
 
 export default theme;

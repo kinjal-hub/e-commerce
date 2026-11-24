@@ -50,6 +50,18 @@ export const fetchSpecificProduct = createAsyncThunk(
   }
 );
 
+export const selectActiveFilterCount = (state) => {
+  const { search, category, priceRange, inStockOnly } = state.products.filters;
+  return [
+    search.trim() !== '',
+    category !== '',
+    priceRange.min !== null,
+    priceRange.max !== null,
+    inStockOnly,
+  ].filter(Boolean).length;
+};
+
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,

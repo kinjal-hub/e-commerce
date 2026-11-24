@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme/theme';
 import Navbar from './Components/products/Navbar';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -20,7 +21,7 @@ function App() {
     <div className="App">
       
       <ThemeProvider theme={theme}>
-        
+        <CssBaseline />
          <Navbar />
          <NotificationSnackbar />
           <Routes>
